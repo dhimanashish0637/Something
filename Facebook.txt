@@ -1,0 +1,80 @@
+if we want to create a remote debug setup then we simply need some steps
+1) import the project like fb then got to project build path and check if any errors are there or not.
+2) open debug configurations and select Remote java application
+3) select the prject name as given and Host: localhost and port: 5007( we can give any port)
+4) click on debug but before that we need to start the designer first after that click on debug button
+5) open the tibco home whichever we want to use for debuging
+6) then click on designer.tra and open in notepad
+7) then go to end and paste this line as given below
+java.extended.properties=-XX:PermSize=32m -XX:MaxPermSize=48m -Xdebug -Xnoagent -Djava.compiler=NONE -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5007
+8) then we open the designer and click on debug button
+9) Note: In this address port number should be the same with debug configurations port number in eclipse
+10) server=y and suspend=y  means we can't open the designer without clicking on debug button in eclipse bcoz port number is suspend.
+11) If we want to open without debug button then we simply change the value of suspend is n i.e suspend=n.
+12) **For reference we can refer this fb workspace "C:\SVN\Facebook\BW_5.15_fb1.4.0"(this is the eclipse location)
+
+-----------
+
+Location of the workspaces that we used in fb release for tomcat 9 changes
+1) Main setup without remote debug setup location "C:\SVN\BW_5.15.0_GA_1_facebook_RTL_1.4.0_ongoing\fb" In this BW code are also included but it is not working.
+2) Using remote desktop
+for 5.15: "C:\workspcae_codebase\BW_5.15_fb1.4.0" this is the working code of facebook for tomcat 9 changes 
+* I have used this tibco home for debugging C:\installation\BW_5.15.0_GA\designer\5.12\bin
+3) for 5.13: "C:\SVN\BW_5.13.0_fb_1.3.0\workspace" this is the working code of facebook for tomcat 7(old one)
+* I have used this tibco home for debugging C:\installation\BW_5.13.0\designer\5.10\bin
+----------------------
+*** Location for working code of backup FBRealTimeListener.java(tomcat 9 changes)
+C:\Backup\fb\Final_working_code
+------------------
+
+where the "facebookplugin.jar" present "C:\installation\BW_5.15.0_GA\bw\plugins\lib\palettes"
+in this jar all the classes for fb code are present
+
+
+------------
+
+If the jar is not created in eclipse properly then we can create the jar through ant and it is directly created tha jar i.e facebookplugin.jar in "C:\installation\BW_5.15.0_GA\bw\plugins\lib\palettes"
+
+here are some steps to create the jar using ant
+1) go to this location of any code like fb "C:\SVN\Facebook\BW_5.15_fb1.4.0\build"
+2) then we edit the build.xml and env.properties in this we just change the tibco home like where we created the jar like facebookplugin.jar like which tibco home we used for debugging
+3) We can follow this location for fb "C:\SVN\Facebook\BW_5.15_fb1.4.0\build"
+4) to create the jar we just hit the cmd in folders url and run ant cmd 
+5) After that the jar is automatically created in tibco home
+
+----------------
+
+NGROk
+1) open the ngrok it is present it here "C:\Users\asurinde\Desktop\ngrok"
+2) open ngrok in chrome and login with tibco id
+3) copy the "ngrok authtoken 1zLllSRShJUlg4koynz8l0qyUxx_7ogUaTQUeBcdVCcW2hd3P" cmd and hit on ngrok window
+4) then we just hit this cmd "ngrok http foo.dev:80" in this we just need to replace the port number 80 to 443(bcoz 443 is for https) and foo.dev to "the name of device name i.e asurinde-t14.apac.tibco.com" this device name is present in (go to computer setting and click on system and in the bottom left click on about 
+5) after that once we hit this cmd then we copy that https url like "ed8e-59-91-69-191.ngrok.io" and paste it into host file(C:\Windows\System32\drivers\etc\hosts)   
+192.168.1.104 83d2-59-91-66-53.ngrok.io
+here 192.168.1.104  is the ip of the system and 83d2-59-91-66-53.ngrok.io is the ngrok url
+Note: we can check the ip using ipconfig cmd
+
+----------
+
+location of sample project that we used during tomcat 9 testing
+for bw5.15 "C:\workspace\BW_5.15.0_fb13" and "C:\workspace\BW_5.15.0_fb14"
+for bw5.13 "C:\workspace\BW_5.15.0_fb15" and "C:\workspace\BW_5.15.0_fb16"
+---------
+
+keystore file is present in C:\asurinde.jks
+pass: tibco123
+------
+How to run RTL:
+
+To run the RTL activity for user
+1) we just firstly start the activity after that go to webhook of that application that are crendentials are used in prject and referesh the webhook page
+
+To run the RTL activity for page
+1) firstly go to graph api explorer and subscriber to specfic field of the page so that facebook knows which page we can use the RTl activity
+2) post : me/subscribed_apps and subscribed_fields : feed/website and all 
+3) run the activity and go to webhook page and refereh
+-------------------------
+In my account I have used App1 
+in Vishakha account we can use Webhook
+---------
+for tomcat 9 changes I referred TomcatServer class that class are present in BW code  "C:\SVN\BW_5.15.0_GA_1_facebook_RTL_1.4.0_ongoing\fb"
